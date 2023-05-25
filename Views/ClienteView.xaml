@@ -1,0 +1,67 @@
+﻿<Window x:Class="crud_wpf_mvvm.Views.ClienteView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:crud_wpf_mvvm.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converter="clr-namespace:crud_wpf_mvvm.Codes"
+        mc:Ignorable="d"
+        Name="ClienteWindow" Title="Cliente" Height="300" Width="600" MinHeight="300" MinWidth="400" WindowStartupLocation="CenterScreen" Loaded="ClienteWindow_Loaded">
+    <Window.Resources>
+        <converter:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+    </Window.Resources>
+
+    <AdornerDecorator>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="58"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                <Grid Height="110">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>    
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Cliente:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"></Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" Width="50" HorizontalAlignment="Left" Margin="0,3,0,3" VerticalContentAlignment="Center" Text="{Binding Path=Cliente.Id, Mode=OneWay}" IsEnabled="False"></TextBox>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Nome:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"></Label>
+                    <TextBox Name="NomeTextBox" Grid.Row="1" Grid.Column="1" Margin="0,3,40,3" VerticalContentAlignment="Center" ToolTip="Nome" Text="{Binding Path=Cliente.Nome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="e-mail:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"></Label>
+                    <TextBox Name="EmailTextBox" Grid.Row="2" Grid.Column="1" Margin="0,3,40,3" VerticalContentAlignment="Center" ToolTip="e-mail" Text="{Binding Path=Cliente.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                </Grid>
+            </ScrollViewer>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Rectangle Grid.ColumnSpan="6" Fill="#FFF4F4F5" Height="58" VerticalAlignment="Bottom"></Rectangle>
+                <Separator Grid.ColumnSpan="6" Margin="0,0,0,50" Height="14" VerticalAlignment="Bottom"></Separator>
+
+                <Button Name="CreateButton" Grid.Column="1" HorizontalAlignment="Center" Width="40" Height="38" VerticalAlignment="Center" Cursor="Hand" ToolTip="Salvar" Margin="0,0,10,0" Visibility ="Collapsed" Content="{materialDesign:PackIcon Kind=ContentSave}" IsEnabled="{Binding Cliente.HasErrors, Converter={StaticResource InvertBooleanConverter}}" Click="CreateButton_Click"></Button>
+                <Button Name="ViewButton" Grid.Column="2" HorizontalAlignment="Center" Width="40" Height="38" VerticalAlignment="Center" Cursor="Hand" ToolTip="Editar" Margin="0,0,10,0" Visibility ="Collapsed" Content="{materialDesign:PackIcon Kind=TableEdit}" Click="ViewButton_Click"></Button>
+                <Button Name="EditButton" Grid.Column="3" HorizontalAlignment="Center" Width="40" Height="38" VerticalAlignment="Center" Cursor="Hand" ToolTip="Salvar" Margin="0,0,10,0" Visibility ="Collapsed" Content="{materialDesign:PackIcon Kind=ContentSave}" IsEnabled="{Binding Cliente.HasErrors, Converter={StaticResource InvertBooleanConverter}}" Click="EditButton_Click"></Button>
+                <Button Name="DeleteButton" Grid.Column="4" HorizontalAlignment="Center" Width="40" Height="38" VerticalAlignment="Center" Cursor="Hand" ToolTip="Excluir" Margin="0,0,10,0" Visibility ="Collapsed" Content="{materialDesign:PackIcon Kind=Delete}" Click="DeleteButton_Click"></Button>
+                <Button Name="CloseButton" Grid.Column="5" HorizontalAlignment="Center" Width="40" Height="38" VerticalAlignment="Center" Cursor="Hand" ToolTip="Fechar" Margin="0,0,10,0" Content="{materialDesign:PackIcon Kind=UndoVariant}" Click="CloseButton_Click"></Button>
+            </Grid>
+        </Grid>
+    </AdornerDecorator>
+</Window>

@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="StyleValidation"
+           TargetType="Control">
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel>
+                        <Image DockPanel.Dock="Right"
+                               Source="pack://application:,,,/Resources/Images/Alerta.ico"
+                               Margin="5,0,0,0"
+                               ToolTip="{Binding ElementName=ErrorAdorned, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                        </Image>
+                        
+                        <Border BorderBrush="Orange"
+                                BorderThickness="1"
+                                CornerRadius="2">
+                            <AdornedElementPlaceholder Name="ErrorAdorned"></AdornedElementPlaceholder>
+                        </Border>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource StyleValidation}"></Style>
+</ResourceDictionary>
